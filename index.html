@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Todo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="todo-app" aria-labelledby="appTitle">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Vanilla JS Todo</p>
+          <h1 id="appTitle">Daily Todo</h1>
+        </div>
+        <p class="today-label" id="todayLabel" aria-live="polite"></p>
+      </header>
+
+      <section class="date-panel" aria-label="날짜 선택">
+        <div class="date-controls">
+          <button class="icon-button" type="button" id="previousDateButton" aria-label="이전 날짜">‹</button>
+          <div class="selected-date">
+            <span class="selected-date__label">선택한 날짜</span>
+            <strong id="selectedDateText"></strong>
+          </div>
+          <button class="icon-button" type="button" id="nextDateButton" aria-label="다음 날짜">›</button>
+        </div>
+        <div class="date-jump" aria-label="월과 연도 빠른 변경">
+          <button class="text-button compact" type="button" id="previousYearButton">이전 년</button>
+          <button class="text-button compact" type="button" id="previousMonthButton">이전 월</button>
+          <label class="date-jump__field" for="yearInput">
+            <span>연도</span>
+            <input id="yearInput" type="number" min="1900" max="2100">
+          </label>
+          <label class="date-jump__field" for="monthSelect">
+            <span>월</span>
+            <select id="monthSelect">
+              <option value="1">1월</option>
+              <option value="2">2월</option>
+              <option value="3">3월</option>
+              <option value="4">4월</option>
+              <option value="5">5월</option>
+              <option value="6">6월</option>
+              <option value="7">7월</option>
+              <option value="8">8월</option>
+              <option value="9">9월</option>
+              <option value="10">10월</option>
+              <option value="11">11월</option>
+              <option value="12">12월</option>
+            </select>
+          </label>
+          <button class="text-button compact" type="button" id="nextMonthButton">다음 월</button>
+          <button class="text-button compact" type="button" id="nextYearButton">다음 년</button>
+        </div>
+        <button class="text-button" type="button" id="todayButton">오늘로 이동</button>
+      </section>
+
+      <section class="week-panel" aria-label="주간 보기">
+        <div class="week-header">
+          <button class="text-button compact" type="button" id="previousWeekButton">이전 주</button>
+          <strong id="weekRangeText"></strong>
+          <button class="text-button compact" type="button" id="nextWeekButton">다음 주</button>
+        </div>
+        <div class="week-list" id="weekList"></div>
+      </section>
+
+      <form class="todo-form" id="todoForm" autocomplete="off">
+        <label class="visually-hidden" for="todoInput">할 일 입력</label>
+        <input
+          id="todoInput"
+          type="text"
+          maxlength="80"
+          placeholder="오늘 할 일을 입력하세요"
+        >
+        <button class="primary-button" type="submit">추가</button>
+      </form>
+      <p class="message" id="message" aria-live="polite"></p>
+
+      <div class="view-toolbar" aria-label="Todo 표시 방식">
+        <div class="view-tabs">
+          <button class="view-tab active" type="button" data-view="daily">날짜별 보기</button>
+          <button class="view-tab" type="button" data-view="all">전체 Todo</button>
+        </div>
+        <label class="sort-control" for="sortSelect">
+          <span>정렬</span>
+          <select id="sortSelect">
+            <option value="date-asc">날짜 빠른순</option>
+            <option value="date-desc">날짜 늦은순</option>
+            <option value="created-desc">최근 추가순</option>
+            <option value="created-asc">오래된 추가순</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-tabs" role="tablist" aria-label="Todo 상태 필터">
+        <button class="filter-tab active" type="button" data-filter="all" role="tab" aria-selected="true">전체</button>
+        <button class="filter-tab" type="button" data-filter="active" role="tab" aria-selected="false">진행 중</button>
+        <button class="filter-tab" type="button" data-filter="completed" role="tab" aria-selected="false">완료</button>
+      </div>
+
+      <section class="todo-section" aria-label="Todo 목록">
+        <ul class="todo-list" id="todoList"></ul>
+        <div class="empty-state" id="emptyState">
+          <strong id="emptyStateTitle">표시할 Todo가 없습니다.</strong>
+          <span id="emptyStateDescription">선택한 날짜와 필터를 확인하거나 새 Todo를 추가해보세요.</span>
+        </div>
+        <nav class="pagination hidden" id="pagination" aria-label="Todo 페이지 이동">
+          <label class="page-size-control" for="pageSizeSelect">
+            <span>페이지당</span>
+            <select id="pageSizeSelect">
+              <option value="5">5개</option>
+              <option value="10">10개</option>
+              <option value="20">20개</option>
+            </select>
+          </label>
+          <div class="page-controls">
+            <button class="page-button" type="button" id="previousPageButton">이전</button>
+            <span class="page-info" id="pageInfo" aria-live="polite"></span>
+            <button class="page-button" type="button" id="nextPageButton">다음</button>
+          </div>
+        </nav>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
