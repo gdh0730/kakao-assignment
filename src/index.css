@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #672be0;
+  --color-brand-dark: #4f1fb3;
+  --color-brand-soft: #f0eaff;
+  --color-ink: #202331;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #202331;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    linear-gradient(180deg, rgba(103, 43, 224, 0.08), rgba(246, 247, 251, 0) 280px),
+    #f6f7fb;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled,
+select:disabled {
+  cursor: not-allowed;
+}

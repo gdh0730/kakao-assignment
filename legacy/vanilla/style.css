@@ -1,0 +1,668 @@
+:root {
+  --primary: #672be0;
+  --primary-dark: #4f1fb3;
+  --primary-soft: #f0eaff;
+  --surface: #ffffff;
+  --background: #f6f7fb;
+  --border: #e4e7ef;
+  --text: #202331;
+  --muted: #747b8c;
+  --danger: #d64545;
+  --success: #188252;
+  --shadow: 0 18px 50px rgba(32, 35, 49, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    linear-gradient(180deg, rgba(103, 43, 224, 0.08), rgba(246, 247, 251, 0) 280px),
+    var(--background);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(100%, 940px);
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.todo-app {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 32px;
+}
+
+.app-header,
+.date-panel,
+.week-header,
+.view-toolbar,
+.todo-form,
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-header {
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.today-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: right;
+}
+
+.date-panel {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fbfbfe;
+}
+
+.date-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--primary);
+  background: var(--surface);
+  font-size: 26px;
+  line-height: 1;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.icon-button:hover,
+.text-button:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.selected-date {
+  display: grid;
+  gap: 4px;
+  min-width: 210px;
+}
+
+.selected-date__label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.date-jump {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.date-jump__field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#yearInput,
+#monthSelect {
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface);
+}
+
+#yearInput {
+  width: 86px;
+  padding: 0 8px;
+}
+
+#monthSelect {
+  padding: 0 28px 0 8px;
+}
+
+#yearInput:focus,
+#monthSelect:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+#selectedDateText {
+  font-size: 22px;
+}
+
+.text-button,
+.primary-button,
+.filter-tab,
+.todo-action {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.text-button {
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--primary);
+  background: var(--surface);
+  border-color: var(--border);
+  font-weight: 700;
+}
+
+.text-button.compact {
+  min-height: 34px;
+  font-size: 13px;
+}
+
+.week-panel {
+  margin-top: 18px;
+  padding: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.week-header {
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+#weekRangeText {
+  font-size: 15px;
+}
+
+.week-list {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.week-day {
+  min-height: 82px;
+  padding: 10px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface);
+  text-align: center;
+}
+
+.week-day:hover {
+  border-color: var(--primary);
+}
+
+.week-day.active {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.week-day.today {
+  box-shadow: inset 0 0 0 2px rgba(103, 43, 224, 0.22);
+}
+
+.week-day__name,
+.week-day__count {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.week-day__date {
+  display: block;
+  margin: 6px 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.week-day.active .week-day__name,
+.week-day.active .week-day__count {
+  color: var(--primary-dark);
+}
+
+.todo-form {
+  margin-top: 24px;
+}
+
+#todoInput {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  outline: none;
+}
+
+#todoInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(103, 43, 224, 0.16);
+}
+
+.primary-button {
+  min-width: 86px;
+  min-height: 48px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: var(--primary);
+  font-weight: 800;
+}
+
+.primary-button:hover {
+  background: var(--primary-dark);
+}
+
+.message {
+  min-height: 20px;
+  margin: 10px 0 18px;
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.message.success {
+  color: var(--success);
+}
+
+.view-toolbar {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.view-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8f9fd;
+}
+
+.view-tab {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 700;
+}
+
+.view-tab.active {
+  color: #ffffff;
+  background: var(--primary);
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#sortSelect,
+#pageSizeSelect {
+  min-height: 40px;
+  padding: 0 34px 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface);
+}
+
+#sortSelect:focus,
+#pageSizeSelect:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+#sortSelect:disabled {
+  color: var(--muted);
+  background: #f2f3f7;
+  cursor: not-allowed;
+}
+
+.filter-tabs {
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8f9fd;
+}
+
+.filter-tab {
+  flex: 1;
+  min-height: 40px;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 700;
+}
+
+.filter-tab.active {
+  color: #ffffff;
+  background: var(--primary);
+}
+
+.todo-section {
+  margin-top: 18px;
+}
+
+.todo-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.todo-item.completed {
+  background: #fbfbfd;
+}
+
+.todo-toggle {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--primary);
+}
+
+.todo-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+}
+
+.todo-content {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.todo-date-badge {
+  width: fit-content;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--primary-dark);
+  background: var(--primary-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.todo-item.completed .todo-text {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.todo-action {
+  min-height: 34px;
+  padding: 0 10px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.todo-action:hover {
+  background: #e4d8ff;
+}
+
+.todo-action.delete {
+  color: var(--danger);
+  background: #fff0f0;
+}
+
+.edit-form {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.edit-input:focus {
+  border-color: var(--primary);
+}
+
+.empty-state {
+  display: grid;
+  gap: 6px;
+  padding: 34px 18px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty-state strong {
+  color: var(--text);
+}
+
+.empty-state.hidden {
+  display: none;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.pagination.hidden {
+  display: none;
+}
+
+.page-size-control,
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-size-control {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.page-button {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--primary);
+  background: var(--surface);
+  font-weight: 700;
+}
+
+.page-button:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.page-button:disabled {
+  color: var(--muted);
+  background: #f2f3f7;
+  cursor: not-allowed;
+}
+
+.page-info {
+  min-width: 88px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 20px 12px;
+  }
+
+  .todo-app {
+    padding: 20px;
+  }
+
+  .app-header,
+  .date-panel,
+  .view-toolbar,
+  .todo-form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .today-label {
+    text-align: left;
+  }
+
+  .date-controls {
+    justify-content: space-between;
+  }
+
+  .date-jump {
+    justify-content: stretch;
+  }
+
+  .date-jump .text-button {
+    flex: 1 1 92px;
+  }
+
+  .date-jump__field {
+    flex: 1 1 130px;
+    justify-content: space-between;
+  }
+
+  #yearInput,
+  #monthSelect {
+    width: 100%;
+  }
+
+  .selected-date {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .week-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .week-day {
+    min-height: 74px;
+  }
+
+  .view-tabs {
+    width: 100%;
+  }
+
+  .view-tab {
+    flex: 1;
+  }
+
+  .sort-control {
+    justify-content: space-between;
+  }
+
+  .pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .page-size-control,
+  .page-controls {
+    justify-content: space-between;
+  }
+
+  .todo-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .todo-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+
+  .edit-form {
+    grid-column: 1 / -1;
+    flex-direction: column;
+  }
+}
