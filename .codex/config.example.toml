@@ -1,0 +1,11 @@
+# Copy selected sections into .codex/config.toml only after trusting this repository.
+
+# Example MCP servers. Keep optional for submission reproducibility.
+# [mcp_servers.context7]
+# command = "npx"
+# args = ["-y", "@upstash/context7-mcp"]
+#
+# [mcp_servers.playwright]
+# command = "npx"
+# args = ["-y", "@playwright/mcp"]
+
